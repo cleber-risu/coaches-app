@@ -9,7 +9,7 @@ export default {
       areas: data.areas,
     };
 
-    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/${userId}.json`;
+    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/coaches/${userId}.json`;
 
     const response = await fetch(url, {
       method: 'PUT',
@@ -26,5 +26,31 @@ export default {
       ...coachData,
       id: userId,
     });
+  },
+
+  async loadCoaches(context) {
+    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/coaches.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      // ...
+    }
+
+    const coaches = [];
+
+    for (const key in data) {
+      const coach = {
+        id: key,
+        firstName: data[key].firstName,
+        lastName: data[key].lastName,
+        description: data[key].description,
+        hourlyRate: data[key].hourlyRate,
+        areas: data[key].areas,
+      };
+      coaches.push(coach);
+    }
+
+    context.commit('setCoaches', coaches);
   },
 };
