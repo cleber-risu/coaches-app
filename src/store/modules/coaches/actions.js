@@ -9,7 +9,7 @@ export default {
       areas: data.areas,
     };
 
-    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/coaches/${userId}.json`;
+    const url = `${process.env.VUE_APP_BASE_URL}/coaches/${userId}.json`;
 
     const response = await fetch(url, {
       method: 'PUT',
@@ -33,7 +33,7 @@ export default {
       return;
     }
 
-    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/coaches.json`;
+    const url = `${process.env.VUE_APP_BASE_URL}/coaches.json`;
     const response = await fetch(url);
     const data = await response.json();
 

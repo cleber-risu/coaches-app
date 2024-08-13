@@ -5,7 +5,7 @@ export default {
       message: payload.message,
     };
 
-    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`;
+    const url = `${process.env.VUE_APP_BASE_URL}/requests/${payload.coachId}.json`;
 
     const response = await fetch(url, {
       method: 'POST',
@@ -26,7 +26,7 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const url = `https://vue-http-demo-86775-default-rtdb.firebaseio.com/requests/${coachId}.json`;
+    const url = `${process.env.VUE_APP_BASE_URL}/requests/${coachId}.json`;
     const response = await fetch(url);
     const data = await response.json();
 

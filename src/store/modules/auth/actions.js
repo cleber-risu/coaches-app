@@ -1,7 +1,7 @@
 export default {
   login() {},
   async signup(context, payload) {
-    const apiKey = 'AIzaSyBa-jSf1SupHCo_g2uZDyzjSonsi7gIiUk';
+    const apiKey = process.env.VUE_APP_API_kEY;
     const url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + apiKey;
 
