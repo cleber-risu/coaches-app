@@ -5,6 +5,11 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
   },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    },
+  },
 };
 </script>
 
@@ -23,6 +28,9 @@ export default {
         </li>
         <li v-else>
           <router-link to="/auth">Login</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logout">Logout</base-button>
         </li>
       </ul>
     </nav>
