@@ -1,6 +1,6 @@
 export default {
-  async registerCoach({ commit, rootGetters }, data) {
-    const userId = rootGetters.userId;
+  async registerCoach(context, data) {
+    const userId = context.rootGetters.userId;
     const coachData = {
       firstName: data.first,
       lastName: data.last,
@@ -9,7 +9,9 @@ export default {
       areas: data.areas,
     };
 
-    const url = `${process.env.VUE_APP_BASE_URL}/coaches/${userId}.json`;
+    const token = context.rootGetters.token;
+
+    const url = `${process.env.VUE_APP_BASE_URL}/coaches/${userId}.json?auth=${token}`;
 
     const response = await fetch(url, {
       method: 'PUT',
@@ -22,7 +24,7 @@ export default {
       // error
     }
 
-    commit('registerCoach', {
+    context.commit('registerCoach', {
       ...coachData,
       id: userId,
     });
